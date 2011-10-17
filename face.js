@@ -5,19 +5,16 @@ var _u = require('underscore'),
 var config = {};
 
 function doGetRequest(path, options){
-  var success = options.success,
-    error = options.error,
-    scope = options.scope || this,
-    url = 'http://api.face.com' + path + '?' + prepareParams(options);
+  var url = 'http://api.face.com' + path + '?' + prepareParams(options);
   
   console.log('Face.com url:', url);
   Request({url: url, json: true}, function(err, response, data){
     if (err || data.status !== 'success'){
-      if (error){
-        error.apply(scope, arguments);
+      if (options.error){
+        options.error.apply(options.scope || this, arguments);
       }
     } else {
-      success.call(scope, data);
+      options.success.call(options.scope || this, data, response);
     }
   });
 }
@@ -35,7 +32,9 @@ function prepareParams(options){
     var val = options[option];
     if (_u.isArray(val)){
       options[option] = val.join(',');
-    } else if (typeof val === 'object' && !_u.isFunction(val)){
+    } else if (_u.isFunction(val)){
+      throw "a function is not a valid parameter: " + option;
+    } else if (typeof val === 'object'){
       options[option] = _u.reduce(val, function(memo, val, key){
         return memo.concat(key + ':' + val);
       }, []).join(',');
