@@ -35,3 +35,19 @@ Just don't forget to run `$ source ~/.bash_profile` after you modify your `.bash
 
 ## Usage
 
+### [facebook.get](http://developers.face.com/docs/api/facebook-get/)
+
+"Returns facebook tags for one or more specified User IDs."
+
+```javascript
+face.facebook.get({
+  uids: '2232645,571756321', // integer, array or string of IDs
+  user_auth: { // object or string
+    fb_user: 2232645,
+    fb_oauth_token: ...
+  },
+  success: function(data){ ... },
+  error: function(error, response, data){ ... }, // optional
+  scope: this // optional
+});
+```

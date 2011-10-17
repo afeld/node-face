@@ -42,8 +42,15 @@ exports.init = function(key, secret){
 exports.facebook = {
   get: function(options){
     options.namespace || (options.namespace = 'facebook.com');
-    // convert user_auth param to string
-    options.user_auth = 'fb_user:' + options.user_auth.fb_user + ',fb_oauth_token:' + options.user_auth.fb_oauth_token;
+    
+    // convert nested params to strings
+    if (_u.isArray(options.uids)){
+      options.uids = options.uids.join(',');
+    }
+    var user_auth = options.user_auth;
+    if (typeof user_auth === 'object'){
+      options.user_auth = 'fb_user:' + user_auth.fb_user + ',fb_oauth_token:' + user_auth.fb_oauth_token;
+    }
     
     doGetRequest('/facebook/get.json', options);
   }
