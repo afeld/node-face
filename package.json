@@ -1,7 +1,7 @@
 {
   "author": "Aidan Feldman <aidan.feldman@gmail.com> (http://www.aidanfeldman.com)",
   "name": "node-face",
-  "description": "Face.com API wrapper NodeJS",
+  "description": "Face.com API wrapper for NodeJS",
   "version": "0.0.1",
   "homepage": "https://github.com/afeld/node-face",
   "repository": {
