@@ -22,7 +22,9 @@ function doGetRequest(path, options){
   console.log('Face.com url:', url);
   Request({url: url, json: true}, function(err, response, data){
     if (err || data.status !== 'success'){
-      error.apply(scope, arguments)
+      if (error){
+        error.apply(scope, arguments);
+      }
     } else {
       success.call(scope, data);
     }
