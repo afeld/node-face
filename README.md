@@ -2,7 +2,7 @@
 
 A Face.com API wrapper for NodeJS.  Created by [Aidan Feldman](http://www.aidanfeldman.com).
 
-## Usage
+## Setup
 
 1. Install via npm:
 
@@ -32,3 +32,6 @@ face.init(process.env.MYAPP_FACE_API_KEY, process.env.MYAPP_FACE_API_SECRET);
 ```
 
 Just don't forget to run `$ source ~/.bash_profile` after you modify your `.bash_config`.
+
+## Usage
+
