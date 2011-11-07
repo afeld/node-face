@@ -1,3 +1,5 @@
+# NOTE: this is still in active development - not yet ready!
+
 # node-face
 
 A Face.com API wrapper for NodeJS.  Created by [Aidan Feldman](http://www.aidanfeldman.com).
