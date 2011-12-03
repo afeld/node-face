@@ -2,16 +2,13 @@
   "author": "Aidan Feldman <aidan.feldman@gmail.com> (http://www.aidanfeldman.com)",
   "name": "node-face",
   "description": "Face.com API wrapper for NodeJS",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/afeld/node-face",
   "repository": {
     "type": "git",
     "url": "https://github.com/afeld/node-face.git"
   },
   "main": "face.js",
-  "engines": {
-    "node": "~0.4.12"
-  },
   "dependencies": {
     "underscore": "1.2.x",
     "request": "2.1.x"
