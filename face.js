@@ -2,18 +2,28 @@ var _u = require('underscore'),
   QueryString = require('querystring'),
   Request = require('request');
 
-var config = {};
+var FACE_POS_ATTRS = ['center', 'eye_left', 'eye_right', 'mouth_left', 'mouth_center', 'mouth_right', 'nose', 'ear_left', 'ear_right'],
+  config = {};
 
 function doGetRequest(path, options){
-  var url = 'http://api.face.com' + path + '?' + prepareParams(options);
+  options = _u.clone(options);
   
+  var asPx = !!options.asPx;
+  delete options.asPx;
+  
+  var url = 'http://api.face.com' + path + '?' + prepareParams(options);
   console.log('Face.com url:', url);
+  
   Request({url: url, json: true}, function(err, response, data){
     if (err || data.status !== 'success'){
       if (options.error){
         options.error.apply(options.scope || this, arguments);
       }
     } else {
+      if (asPx){
+        data = photoDataToPx(data);
+      }
+      
       options.success.call(options.scope || this, data, response);
     }
   });
@@ -59,3 +69,21 @@ exports.facebook = {
     doGetRequest('/facebook/get.json', options);
   }
 };
+
+
+// Utility functions
+
+function photoDataToPx(photoData){
+  FACE_POS_ATTRS.forEach(function(attr){
+    photoData.tags.forEach(function(faceData, i){
+      if (photoData.tags[i][attr]){
+        photoData.tags[i][attr].x *= ( photoData.width / 100.0 );
+        photoData.tags[i][attr].y *= ( photoData.height / 100.0 );
+      } else {
+        console.warn("WARN: missing position attribute " + attr);
+      }
+    });
+  });
+  return photoData;
+};
+exports.photoDataToPx = photoDataToPx;
