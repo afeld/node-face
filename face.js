@@ -73,17 +73,25 @@ exports.facebook = {
 
 // Utility functions
 
-function photoDataToPx(photoData){
-  FACE_POS_ATTRS.forEach(function(attr){
-    photoData.tags.forEach(function(faceData, i){
-      if (photoData.tags[i][attr]){
-        photoData.tags[i][attr].x *= ( photoData.width / 100.0 );
-        photoData.tags[i][attr].y *= ( photoData.height / 100.0 );
+function photoDataToPx(photo){
+  var widthPct = photo.width / 100.0,
+    heightPct = photo.height / 100.0;
+  
+  // TODO dont mutate
+  photo.tags.forEach(function(tag, i){
+    FACE_POS_ATTRS.forEach(function(attr){
+      var attrData = tag[attr];
+      if (attrData){
+        attrData.x *= widthPct;
+        attrData.y *= heightPct;
       } else {
         console.warn("WARN: missing position attribute " + attr);
       }
     });
+    
+    tag.width *= widthPct;
+    tag.height *= heightPct;
   });
-  return photoData;
+  return photo;
 };
 exports.photoDataToPx = photoDataToPx;
