@@ -34,6 +34,10 @@ function doGetRequest(path, options){
 function prepareParams(options){
   options = _u.clone(options);
   
+  // filter can't be encoded
+  var filter = options.filter;
+  delete options.filter;
+  
   delete options.success;
   delete options.error;
   delete options.scope;
@@ -52,7 +56,12 @@ function prepareParams(options){
   }
   
   _u.defaults(options, config);
-  return QueryString.stringify(options)
+  
+  var queryString = QueryString.stringify(options);
+  if (filter){
+    queryString += '&filter=' + filter;
+  }
+  return queryString;
 }
 
 
