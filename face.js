@@ -79,6 +79,12 @@ exports.facebook = {
   }
 };
 
+exports.faces = {
+	detect: function(options){
+		doGetRequest('/faces/detect.json', options);
+	}
+};
+
 
 // Utility functions
 
