@@ -53,3 +53,16 @@ face.facebook.get({
   scope: this // optional
 });
 ```
+
+### [faces.detect](http://developers.face.com/docs/api/faces-detect/)
+
+"Returns tags for detected faces in one or more photos, with geometric information of the tag, eyes, nose and mouth, as well as various attributes such as gender, is wearing glasses, and is smiling."
+
+```javascript
+face.faces.detect({
+  urls: 'http://farm4.staticflickr.com/3368/3632119795_fa83f26270_b.jpg',
+  success: function( data ) {
+    console.log( require('util').inspect( data, false, 10 ) )
+  }
+});
+```
