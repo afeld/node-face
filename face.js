@@ -80,9 +80,9 @@ exports.facebook = {
 };
 
 exports.faces = {
-	detect: function(options){
-		doGetRequest('/faces/detect.json', options);
-	}
+  detect: function(options){
+    doGetRequest('/faces/detect.json', options);
+  }
 };
 
 
